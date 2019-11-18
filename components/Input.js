@@ -4,7 +4,6 @@ import { useState } from "react"
 const Label = styled.label`
   display: inline-block;
   margin-bottom: 1.5rem;
-  transition: 0.1s ease;
 
   :focus-within {
     color: var(--focus);
@@ -30,7 +29,6 @@ const StyledInput = styled.input`
   line-height: 1;
   outline: none;
   width: 3ch;
-  transition: 0.1s ease;
 
   ::-webkit-inner-spin-button,
   ::-webkit-outer-spin-button {
