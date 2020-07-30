@@ -2,25 +2,28 @@ import { useState } from "react"
 import Input from "./Input"
 
 export default function TimeInput({
-  initialValue,
+  value: initialValue,
   label,
   onChange = () => null,
+  max = 59,
 }) {
   const [value, setValue] = useState(initialValue)
 
-  const inputChanged = e => {
-    onChange(e)
-    setValue(String(e.currentTarget.value).padStart(2, "0"))
+  const inputChanged = (e) => {
+    const v = onChange(e)
+    setValue(v ? v : e.currentTarget.value)
+    return onChange(e)
   }
 
   return (
     <Input
       label={label}
-      initialValue={value}
+      value={value}
       onChange={inputChanged}
       type="number"
       pattern="[0-9]+"
       min={0}
+      max={max}
     />
   )
 }

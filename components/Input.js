@@ -28,7 +28,8 @@ const StyledInput = styled.input`
   font-size: var(--mega-size);
   line-height: 1;
   outline: none;
-  width: 3ch;
+  width: 2.45ch;
+  text-align: center;
 
   ::-webkit-inner-spin-button,
   ::-webkit-outer-spin-button {
@@ -38,7 +39,7 @@ const StyledInput = styled.input`
 `
 
 export default function Input({
-  initialValue,
+  value: initialValue,
   label,
   onChange = () => null,
   type = "text",
@@ -48,9 +49,13 @@ export default function Input({
 }) {
   const [value, setValue] = useState(initialValue)
 
-  const inputChanged = e => {
-    onChange(e)
-    setValue(e.currentTarget.value)
+  const inputChanged = (e) => {
+    const v = onChange(e)
+    setValue(v ? v : e.currentTarget.value)
+  }
+
+  const numberFormatted = (n) => {
+    return String(Math.max(Math.min(Number(n), max), min)).padStart(2, "0")
   }
 
   return (
@@ -59,7 +64,7 @@ export default function Input({
       <StyledInput
         onChange={inputChanged}
         type={type}
-        value={value}
+        value={numberFormatted(value)}
         pattern={pattern}
         min={min}
         max={max}

@@ -1,47 +1,37 @@
-import styled from "@emotion/styled"
-import Countdown from "react-countdown-now"
-import Button from "../components/Button"
-import TimeInput from "../components/TimeInput"
+import Head from "next/head"
+import TimerApp from "../components/TimerApp"
 
-const Container = styled.div`
-  align-self: center;
-  justify-self: center;
-  margin: auto;
-`
-
-const formatTime = n => String(n).padStart(2, "0")
-
-const renderer = ({ hours, minutes, seconds, completed }) => {
-  const { hh, mm, ss } = {
-    hh: formatTime(hours),
-    mm: formatTime(minutes),
-    ss: formatTime(seconds),
-  }
-  if (completed) {
-    // Render a completed state
-    return <div>Time's up.</div>
+export default function Index({ h, m, s, running = false }) {
+  let initial
+  if (h === 0 && m === 0 && s === 0) {
+    initial = {
+      h: 0,
+      m: 10,
+      s: 0,
+    }
   } else {
-    // Render a countdown
-    return (
-      <span>
-        {hh}:{mm}:{ss}
-      </span>
-    )
+    initial = {
+      s: Number(s) % 60,
+      m: (Number(m) + Math.floor(Number(s) / 60)) % 60,
+      h: Number(h) + Math.floor(Number(m) / 60) + Math.floor(Number(s) / 3600),
+    }
   }
+
+  return (
+    <>
+      <Head>
+        <title>Lucid Timer</title>
+      </Head>
+      <TimerApp h={initial.h} m={initial.m} s={initial.s} running={running} />
+    </>
+  )
 }
 
-export default function Index() {
-  return (
-    <Container>
-      <div>
-        <TimeInput label="Hours" initialValue="00" />
-        <TimeInput label="Minutes" initialValue="10" />
-        <TimeInput label="Seconds" initialValue="00" />
-      </div>
-      <div>
-        <Button label="Start Timer" />
-      </div>
-      <Countdown date={Date.now() + 10000} renderer={renderer} />
-    </Container>
-  )
+export async function getServerSideProps(context) {
+  const {
+    query: { h = 0, m = 0, s = 0, running = false },
+  } = context
+  return {
+    props: { h, m, s, running },
+  }
 }

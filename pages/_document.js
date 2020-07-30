@@ -18,8 +18,8 @@ const GlobalStyles = () => (
         --foreground: var(--light);
         --background: var(--dark);
 
-        --fontStack: "IBM Plex Sans", -apple-system, system-ui,
-          BlinkMacSystemFont, sans-serif;
+        --fontStack: "Inter", -apple-system, system-ui, BlinkMacSystemFont,
+          sans-serif;
         --mega-size: 20vmin;
       }
 
@@ -45,6 +45,7 @@ const GlobalStyles = () => (
         font: 100%/1.25 var(--fontStack);
         color: var(--foreground);
         background-color: var(--background);
+        font-variant-numeric: tabular-nums;
       }
 
       body,
@@ -59,7 +60,7 @@ const GlobalStyles = () => (
   />
 )
 
-class UndergroundDocument extends Document {
+class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
@@ -70,9 +71,10 @@ class UndergroundDocument extends Document {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600,700&display=swap"
             rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/inter.css"
           />
+
           <link rel="shortcut icon" href="/images/favicon.png" />
         </Head>
         <body>
@@ -85,4 +87,4 @@ class UndergroundDocument extends Document {
   }
 }
 
-export default UndergroundDocument
+export default MyDocument
