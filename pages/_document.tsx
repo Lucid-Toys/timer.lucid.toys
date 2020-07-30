@@ -46,12 +46,19 @@ const GlobalStyles = () => (
         color: var(--foreground);
         background-color: var(--background);
         font-variant-numeric: tabular-nums;
+        height: -webkit-fill-available;
       }
 
       body,
       #__next {
         min-height: 100vh;
-        min-height: -webkit-fill-available;
+      }
+
+      @supports (-webkit-touch-callout: none) {
+        body,
+        #__next {
+          min-height: fill-available;
+        }
       }
 
       #__next {

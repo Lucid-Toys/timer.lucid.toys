@@ -18,6 +18,7 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
           display: inline-block;
           margin: 0.1em 0;
           animation: blink 1s linear infinite;
+          font-feature-settings: "case";
         }
 
         .completed {
