@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
 import React from "react"
 import Countdown from "react-countdown-now"
-import Button from "../components/Button"
-import CountdownRenderer from "../components/CountdownRenderer"
-import TimeInput from "../components/TimeInput"
+import Button from "./Button"
+import CountdownRenderer from "./CountdownRenderer"
+import TimeInput from "./TimeInput"
 
 const { useState, useEffect } = React
 

@@ -38,6 +38,16 @@ const StyledInput = styled.input`
   }
 `
 
+interface Props {
+  value?: number
+  label: string
+  onChange: (SyntheticEvent?) => number | void
+  type: "text" | "number"
+  pattern: string
+  min: number
+  max: number
+}
+
 export default function Input({
   value: initialValue,
   label,
@@ -46,7 +56,7 @@ export default function Input({
   pattern,
   min,
   max,
-}) {
+}: Props) {
   const [value, setValue] = useState(initialValue)
 
   const inputChanged = (e) => {
