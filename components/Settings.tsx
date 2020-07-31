@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react"
 import { useSettings } from "./SettingsContext"
-
-const IS_CLIENT = typeof window !== "undefined"
-const notifsAvailableOnClient = IS_CLIENT ? "Notifications" in window : false
-
 type NotificationsPermission = "default" | "denied" | "granted" | false
 
+const isClient = () => typeof window !== undefined
+
 const checkNotificationsGranted = () => {
-  if (!IS_CLIENT) {
+  if (!isClient()) {
     return false
   }
 
@@ -19,15 +17,11 @@ const checkNotificationsGranted = () => {
 }
 
 const setupNotifications = (setup: boolean) => {
-  if (!IS_CLIENT) {
-    return false
-  }
+  const permission = checkNotificationsGranted()
 
-  if (!("Notification" in window)) {
+  if (permission == false) {
     return
   }
-
-  const permission = checkNotificationsGranted()
 
   if (setup && permission !== "denied" && permission !== "granted") {
     Notification.requestPermission().then((permission) => {
@@ -49,8 +43,10 @@ export default function Settings() {
   const [notifsAvailable, setNotifsAvailable] = useState<
     NotificationsPermission
   >(false)
+  const [notifsOnClient, setNotifsOnClient] = useState(false)
 
   useEffect(() => {
+    setNotifsOnClient(isClient() ? "Notification" in window : false)
     setNotifsAvailable(checkNotificationsGranted())
   }, [remember, notifications, notifsAvailable])
 
@@ -81,7 +77,7 @@ export default function Settings() {
               </small>
             </label>
 
-            {notifsAvailableOnClient && (
+            {notifsOnClient && (
               <label>
                 <input
                   type="checkbox"
