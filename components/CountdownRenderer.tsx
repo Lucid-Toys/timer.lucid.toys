@@ -1,6 +1,25 @@
 import AudioPlayer from "./AudioPlayer"
 
+const IS_CLIENT = typeof window !== "undefined"
 const formatTime = (n) => String(n).padStart(2, "0")
+
+const sendNotification = () => {
+  if (!IS_CLIENT) {
+    return
+  }
+
+  if (Notification.permission === "granted") {
+    const iconPath = window.location.origin + "/images/timer-icon.png"
+    console.log(iconPath)
+    const notification = new Notification("Timer finished", {
+      vibrate: [200, 100, 200],
+      requireInteraction: true,
+      icon: iconPath,
+    })
+  }
+
+  return true
+}
 
 const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
   const { hh, mm, ss } = {
@@ -12,6 +31,7 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
   return (
     <>
       {completed && <AudioPlayer />}
+      {completed && sendNotification()}
       <span className={completed ? "completed" : ""}>
         {hh}:{mm}:{ss}
       </span>

@@ -83,7 +83,7 @@ class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/inter.css"
           />
 
-          <link rel="shortcut icon" href="/images/favicon.png" />
+          <link rel="shortcut icon" href="/images/timer-favicon.png" />
         </Head>
         <body>
           <GlobalStyles />
