@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSettings } from "./SettingsContext"
 
 const IS_CLIENT = typeof window !== "undefined"
-const notifsAvailableOnClient = IS_CLIENT ? "Notifications" in window : false
+const notifsAvailableOnClient = IS_CLIENT ? "Notification" in window : false
 
 type NotificationsPermission = "default" | "denied" | "granted" | false
 
