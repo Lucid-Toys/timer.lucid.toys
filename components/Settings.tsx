@@ -116,7 +116,6 @@ export default function Settings() {
 
         .container {
           padding: 1em;
-          opacity: 0.65;
           transition: 0.3s ease;
           background-color: rgba(60, 60, 60, 0.8);
           backdrop-filter: blur(10px);
@@ -133,11 +132,6 @@ export default function Settings() {
           display: flex;
           flex-direction: column;
           margin-top: 0.5em;
-        }
-
-        .container:hover,
-        .container:focus-within {
-          opacity: 1;
         }
 
         input {

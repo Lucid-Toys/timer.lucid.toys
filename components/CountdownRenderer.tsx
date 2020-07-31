@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import AudioPlayer from "./AudioPlayer"
 
 const IS_CLIENT = typeof window !== "undefined"
@@ -9,13 +10,24 @@ const sendNotification = () => {
   }
 
   if (Notification.permission === "granted") {
-    const notification = new Notification("Timer finished", {
+    const notification = new Notification(`Timer finished`, {
+      body: `Finished at ${Date.now().toLocaleString()}`,
       vibrate: [200, 100, 200],
       requireInteraction: true,
     })
   }
 
   return true
+}
+
+const CompletedNotificationRenderer = ({ completed }) => {
+  useEffect(() => {
+    if (completed) {
+      sendNotification()
+    }
+  }, [completed])
+
+  return <></>
 }
 
 const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
@@ -28,7 +40,7 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
   return (
     <>
       {completed && <AudioPlayer />}
-      {completed && sendNotification()}
+      {completed && <CompletedNotificationRenderer completed={completed} />}
       <span className={completed ? "completed" : ""}>
         {hh}:{mm}:{ss}
       </span>
