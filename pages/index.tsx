@@ -1,4 +1,6 @@
 import Head from "next/head"
+import Settings from "../components/Settings"
+import SettingsProvider from "../components/SettingsContext"
 import TimerApp from "../components/TimerApp"
 
 export default function Index({ h, m, s, running = false }) {
@@ -18,12 +20,13 @@ export default function Index({ h, m, s, running = false }) {
   }
 
   return (
-    <>
+    <SettingsProvider>
       <Head>
         <title>Lucid Timer</title>
       </Head>
       <TimerApp h={initial.h} m={initial.m} s={initial.s} running={running} />
-    </>
+      <Settings />
+    </SettingsProvider>
   )
 }
 
