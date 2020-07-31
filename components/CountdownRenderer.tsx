@@ -1,3 +1,5 @@
+import AudioPlayer from "./AudioPlayer"
+
 const formatTime = (n) => String(n).padStart(2, "0")
 
 const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
@@ -9,6 +11,7 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
 
   return (
     <>
+      {completed && <AudioPlayer />}
       <span className={completed ? "completed" : ""}>
         {hh}:{mm}:{ss}
       </span>
