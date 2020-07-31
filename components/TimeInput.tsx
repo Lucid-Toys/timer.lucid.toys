@@ -29,7 +29,7 @@ export default function TimeInput({
       value={value}
       onChange={inputChanged}
       type="number"
-      pattern="[0-9]+"
+      pattern="[0-9]*"
       min={0}
       max={max}
     />
