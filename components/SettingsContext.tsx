@@ -33,12 +33,10 @@ const SettingsProvider = (props) => {
 
   useEffect(() => {
     if (remember) {
-      console.log("saving items")
       localStorage.setItem(keys.AUDIO, JSON.stringify(audio))
       localStorage.setItem(keys.NOTIFS, JSON.stringify(notifications))
       localStorage.setItem(keys.REMEMBER, JSON.stringify(remember))
     } else {
-      console.log("clearing items")
       localStorage.clear()
     }
   }, [audio, notifications, remember])
