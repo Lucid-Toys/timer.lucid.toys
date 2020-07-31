@@ -10,12 +10,20 @@ const checkNotificationsGranted = () => {
     return false
   }
 
+  if (!("Notification" in window)) {
+    return false
+  }
+
   return Notification.permission
 }
 
 const setupNotifications = (setup: boolean) => {
   if (!IS_CLIENT) {
     return false
+  }
+
+  if (!("Notification" in window)) {
+    return
   }
 
   const permission = checkNotificationsGranted()

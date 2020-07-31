@@ -9,6 +9,10 @@ const sendNotification = () => {
     return
   }
 
+  if (!("Notification" in window)) {
+    return
+  }
+
   if (Notification.permission === "granted") {
     const notification = new Notification(`Timer finished`, {
       body: `Finished at ${Date.now().toLocaleString()}`,
