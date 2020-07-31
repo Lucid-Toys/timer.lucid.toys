@@ -69,5 +69,5 @@ export default function AudioPlayer() {
     return stopTape
   }, [audio])
 
-  return <span></span>
+  return <></>
 }
