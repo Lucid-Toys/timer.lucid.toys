@@ -9,12 +9,9 @@ const sendNotification = () => {
   }
 
   if (Notification.permission === "granted") {
-    const iconPath = window.location.origin + "/images/timer-icon.png"
-    console.log(iconPath)
     const notification = new Notification("Timer finished", {
       vibrate: [200, 100, 200],
       requireInteraction: true,
-      icon: iconPath,
     })
   }
 
