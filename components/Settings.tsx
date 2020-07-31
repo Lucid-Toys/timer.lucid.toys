@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useSettings } from "./SettingsContext"
 
 const IS_CLIENT = typeof window !== "undefined"
+const notifsAvailableOnClient = IS_CLIENT ? "Notifications" in window : false
 
 type NotificationsPermission = "default" | "denied" | "granted" | false
 
@@ -80,23 +81,25 @@ export default function Settings() {
               </small>
             </label>
 
-            <label>
-              <input
-                type="checkbox"
-                defaultChecked={notifications}
-                onInput={notifsChanged}
-              />
-              Show notification when timer ends
-              <small className="setting-description">
-                {!notifsAvailable && (
-                  <>
-                    <strong>Notifications not currently available.</strong> When
-                    enabling, the browser will ask if you want to allow
-                    notifications.
-                  </>
-                )}
-              </small>
-            </label>
+            {notifsAvailableOnClient && (
+              <label>
+                <input
+                  type="checkbox"
+                  defaultChecked={notifications}
+                  onInput={notifsChanged}
+                />
+                Show notification when timer ends
+                <small className="setting-description">
+                  {!notifsAvailable && (
+                    <>
+                      <strong>Notifications not currently available.</strong>{" "}
+                      When enabling, the browser will ask if you want to allow
+                      notifications.
+                    </>
+                  )}
+                </small>
+              </label>
+            )}
 
             <hr />
 
