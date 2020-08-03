@@ -41,11 +41,18 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
     ss: formatTime(seconds),
   }
 
+  const timeAlmostUp = hours === 0 && minutes === 0 && seconds <= 10
+
   return (
     <>
       {completed && <AudioPlayer />}
       {completed && <CompletedNotificationRenderer completed={completed} />}
-      <span className={completed ? "completed" : ""}>
+      <span
+        className={[
+          completed ? "completed" : "",
+          timeAlmostUp ? "blink" : "",
+        ].join(" ")}
+      >
         {hh}:{mm}:{ss}
       </span>
       <style jsx>{`
@@ -53,13 +60,15 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
           font-size: var(--mega-size);
           display: inline-block;
           margin: 0.1em 0;
-          animation: blink 1s linear infinite;
           font-feature-settings: "case";
         }
 
         .completed {
           color: var(--danger);
-          animation: none;
+        }
+
+        .blink {
+          animation: blink 1s linear infinite;
         }
 
         @keyframes blink {
