@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useEffect } from "react"
 import AudioPlayer from "./AudioPlayer"
 
@@ -41,10 +42,16 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }) => {
     ss: formatTime(seconds),
   }
 
-  const timeAlmostUp = hours === 0 && minutes === 0 && seconds <= 10
+  const timeAlmostUp =
+    hours === 0 && minutes === 0 && seconds <= 10 && seconds !== 0
 
   return (
     <>
+      <Head>
+        <title>
+          {hh === "00" ? `${mm}:${ss}` : `${hh}:${mm}:${ss}`} | Lucid Timer
+        </title>
+      </Head>
       {completed && <AudioPlayer />}
       {completed && <CompletedNotificationRenderer completed={completed} />}
       <span
