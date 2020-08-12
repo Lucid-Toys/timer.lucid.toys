@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@emotion/core": "^10.0.28",
+    "@emotion/core": "^10.0.34",
     "@emotion/styled": "^10.0.27",
     "next": "^9.5.2",
     "react": "^16.13.1",
